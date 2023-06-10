@@ -1,5 +1,3 @@
-export {showSearchBtn, hideSearchBtn};
-
 const refs = {
     btnOpenEl: document.querySelector(".search-button"),
     btnSearchEl: document.querySelector(".search-submit"),
