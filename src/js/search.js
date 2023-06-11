@@ -14,20 +14,12 @@ let TLSrch = new TimelineLite({onReverseComplete: () => {
 createTxt('Search images...', searchLbl, 'search-text');
 searchTxt = document.querySelectorAll('.search-text');
 
-search.addEventListener('click', e => {
-  e.preventDefault();
-  e.stopPropagation();
-  searchInp.focus();
-  if (!animating) animSearch();
-});
 
 searchBtn.addEventListener('click', e => {
-  e.preventDefault();
   if (!animating) animSearch();
 });
 
 searchBrd.addEventListener('click', e => {
-  e.preventDefault();
   if (!animating) animSearch();
 });
 
@@ -41,20 +33,20 @@ searchInp.addEventListener('blur', () => {
   TLTxt.reverse().timeScale(1.3);
 });
 
-search.addEventListener('submit', e => {
-  e.preventDefault();
-  busy = true;
-  TLTxt.paused() ? TLTxt.clear() : TLTxt.play();
-  let val = searchInp.value.trim();
-  searchInp.disabled = true;
-  if (val.length) {
-    cloneLbl();
-    createLblTxt(val);
-  }
-  else TLSrch.reverse();
-  searchInp.value = '';
-  searchInp.blur();
-});
+// search.addEventListener('submit', e => {
+//   e.preventDefault();
+//   busy = true;
+//   TLTxt.paused() ? TLTxt.clear() : TLTxt.play();
+//   let val = searchInp.value.trim();
+//   searchInp.disabled = true;
+//   if (val.length) {
+//     cloneLbl();
+//     createLblTxt(val);
+//   }
+//   else TLSrch.reverse();
+//   searchInp.value = '';
+//   searchInp.blur();
+// });
 
 searchCls.addEventListener('mousedown', e => {
   e.preventDefault();
@@ -130,10 +122,10 @@ function animClonedTxt(el) {
   }, Math.max((tlDur - .35) * 1000, 0));
 }
 
-function cloneLbl() {
-  clonedLblWrap = document.createElement('div');
-  clonedLblWrap.className = 'search-label';
-  search.appendChild(clonedLblWrap);
-  clonedLbl = document.createElement('div');
-  clonedLblWrap.appendChild(clonedLbl);
-}; 
+// function cloneLbl() {
+//   clonedLblWrap = document.createElement('div');
+//   clonedLblWrap.className = 'search-label';
+//   search.appendChild(clonedLblWrap);
+//   clonedLbl = document.createElement('div');
+//   clonedLblWrap.appendChild(clonedLbl);
+// }; 

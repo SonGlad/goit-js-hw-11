@@ -10,13 +10,10 @@
   }
   
   body {
+    padding-bottom: 30px;
     width: 100%;
     min-height: 100vh;
     background-image: linear-gradient(to right, #4daf54, #3d8880);
-    
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
     font-family: 'PT Sans', sans-serif;
   }
   
@@ -27,7 +24,6 @@
     width: 450px;
     height: 120px;
     position: relative;
-    // overflow: hidden;
     &-input {
       width: 116%;
       height: 100%;

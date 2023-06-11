@@ -1,5 +1,10 @@
 img {
     display: block;
+    max-width: 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
     margin: 0 auto;
   }
 
@@ -8,6 +13,7 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-shadow: 0 20px 38px rgba(0,0,0, 0.1), 0 10px 20px 
 };
 
 .gallery {
@@ -20,8 +26,14 @@ img {
 }
 
 .info {
-    background-color: rgb(255, 255, 255, 0.5);
-    padding: 5px
+    background-color: rgb(255, 255, 255, 0.4);
+    display: flex;
+    padding: 5px;
+    height: 160px;
+    max-width: 300px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 };
 
 .info-item{
