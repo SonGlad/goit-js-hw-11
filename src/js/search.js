@@ -14,11 +14,20 @@ let TLSrch = new TimelineLite({onReverseComplete: () => {
 createTxt('Search images...', searchLbl, 'search-text');
 searchTxt = document.querySelectorAll('.search-text');
 
-searchBtn.addEventListener('click', () => {
+search.addEventListener('click', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  searchInp.focus();
   if (!animating) animSearch();
 });
 
-searchBrd.addEventListener('click', () => {
+searchBtn.addEventListener('click', e => {
+  e.preventDefault();
+  if (!animating) animSearch();
+});
+
+searchBrd.addEventListener('click', e => {
+  e.preventDefault();
   if (!animating) animSearch();
 });
 

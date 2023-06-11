@@ -1,0 +1,30 @@
+img {
+    display: block;
+    margin: 0 auto;
+  }
+
+
+.photo-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+};
+
+.gallery {
+    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.info {
+    background-color: rgb(255, 255, 255, 0.5);
+    padding: 5px
+};
+
+.info-item{
+    margin-top: 5px;
+    margin-bottom: 5px;
+};
