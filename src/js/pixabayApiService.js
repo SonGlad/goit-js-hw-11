@@ -8,11 +8,12 @@ export default class DataAPIService {
     constructor() {
         this.searchQuery = '';
         this.page = 1;
+        this.perPage = 40;
     };
     
     async fetchArticles() {   
         const url = `${BASE_URL}/?key=${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&
-        orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`;
+        orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`;
         
         const response = await axios.get(url);
             this.incrementPage();

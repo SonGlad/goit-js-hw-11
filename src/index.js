@@ -105,7 +105,8 @@ function appendCreatedMarkup(hits){
 
 
 function checkForMaxPage(totalHits){
-    if(totalHits <= 40){
+    const amountPerPage = newDataAPIService.perPage;
+    if(totalHits <= amountPerPage){
         disableSearchMoreBtn();
         Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
         return;
@@ -115,7 +116,8 @@ function checkForMaxPage(totalHits){
 
 function pageCheckForNotification({ hits , totalHits }){
     const nextPage = newDataAPIService.page;
-    const maxPage = Math.ceil(totalHits / 40);
+    const amountPerPage = newDataAPIService.perPage;
+    const maxPage = Math.ceil(totalHits / amountPerPage);
 
     if(nextPage > maxPage){       
         appendCreatedMarkup(hits);
