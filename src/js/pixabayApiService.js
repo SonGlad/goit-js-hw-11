@@ -10,16 +10,15 @@ export default class DataAPIService {
         this.page = 1;
     };
     
-    fetchArticles() {   
+    async fetchArticles() {   
         const url = `${BASE_URL}/?key=${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&
         orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`;
-    
-        return fetch(url)
-            .then(response => response.json()) 
-            .then(({ hits , totalHits }) => {  
-                this.incrementPage();
-                return {hits, totalHits};
-            })
+        
+        const response = await axios.get(url);
+            this.incrementPage();
+            return response.data;
+            // const { hits, totalHits } = response.data;
+            // return { hits, totalHits };
     };
 
     setSearchValue(query) {
@@ -33,14 +32,4 @@ export default class DataAPIService {
     resetPage(){
         this.page = 1;
     };
-
-    
-    // get query() {
-    //     return this.searchQuery;
-    // };
-
-    // set query(newQuery) {
-    //     this.searchQuery = newQuery;
-    // };
-
 };
