@@ -22,23 +22,6 @@ refs.formEl.addEventListener('submit', onSubmit);
 refs.btnLoadEl.addEventListener('click', onLoadMore);
 
 
-async function generateFetchArticlesMarkup(){
-    const { hits, totalHits } = await newDataAPIService.fetchArticles();
-        try {
-            Notiflix.Loading.remove();
-            if(hits.length === 0){
-                Notiflix.Report.failure("Sorry, there are no images matching your search query. Please try again.");
-                return;
-            }
-            Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-            enableSearchMoreBtn();
-            checkForMaxPage(totalHits);
-            appendCreatedMarkup(hits);
-        } catch(error) {
-            notiflixForErrorReport(error);
-        }
-};
-
 
 function onSubmit(event){
     event.preventDefault();
@@ -58,15 +41,33 @@ function onSubmit(event){
 };
 
 
+async function generateFetchArticlesMarkup(){
+    Notiflix.Loading.remove();
+        try {
+            const { hits, totalHits } = await newDataAPIService.fetchArticles();
+            if(hits.length === 0){
+                Notiflix.Report.failure("Sorry, there are no images matching your search query. Please try again.");
+                return;
+            }
+            Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+            enableSearchMoreBtn();
+            checkForMaxPage(totalHits);
+            appendCreatedMarkup(hits);
+        } catch (error) {
+            notiflixForErrorReport(error);
+        }
+};
+
+
 async function onLoadMore(){
     disableSearchMoreBtn();
     Notiflix.Loading.circle('Loading data, please wait...');
-    const { hits, totalHits } = await newDataAPIService.fetchArticles();
         try {
+            const { hits, totalHits } = await newDataAPIService.fetchArticles();
             Notiflix.Loading.remove();
             enableSearchMoreBtn();
             pageCheckForNotification({ hits, totalHits });
-        } catch (error){
+        } catch (error) {
             notiflixForErrorReport(error);
         }
 };
@@ -147,15 +148,15 @@ function resetContent(){
 };
 
 function enableSearchMoreBtn(){
-    refs.btnLoadEl.classList.remove('is-hidden')
+    refs.btnLoadEl.classList.remove('is-hidden');
 };
 
 function disableSearchMoreBtn(){
-    refs.btnLoadEl.classList.add('is-hidden')
+    refs.btnLoadEl.classList.add('is-hidden');
 };
 
 function notiflixForErrorReport(error){
     Notiflix.Loading.remove();
     Notiflix.Report.failure('Error fetching breeds:', error);
-    throw error;
+    throw new error;
 };

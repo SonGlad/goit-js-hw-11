@@ -13,6 +13,14 @@ class DataAPIService {
     fetchArticles() {   
         const url = `${BASE_URL}/?key=${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&
         orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`;
+       
+        // FETCH
+        return fetch(url)
+            .then(response => response.json()) 
+            .then(({ hits , totalHits }) => {  
+                this.incrementPage();
+                return {hits, totalHits};
+            })
  
         // AXIOS
         // return axios.get(url).then((response) => {
@@ -22,13 +30,6 @@ class DataAPIService {
         // });
 
 
-        // FETCH
-        // return fetch(url)
-        //     .then(response => response.json()) 
-        //     .then(({ hits , totalHits }) => {  
-        //         this.incrementPage();
-        //         return {hits, totalHits};
-        //     })
     };
 
     setSearchValue(query) {
