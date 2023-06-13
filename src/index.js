@@ -22,7 +22,6 @@ refs.formEl.addEventListener('submit', onSubmit);
 refs.btnLoadEl.addEventListener('click', onLoadMore);
 
 
-
 function onSubmit(event){
     event.preventDefault();
     disableSearchMoreBtn();
