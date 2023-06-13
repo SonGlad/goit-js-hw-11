@@ -41,20 +41,20 @@ function onSubmit(event){
 
 
 async function generateFetchArticlesMarkup(){
-    Notiflix.Loading.remove();
-        try {
-            const { hits, totalHits } = await newDataAPIService.fetchArticles();
-            if(hits.length === 0){
-                Notiflix.Report.failure("Sorry, there are no images matching your search query. Please try again.");
-                return;
-            }
-            Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-            enableSearchMoreBtn();
-            checkForMaxPage(totalHits);
-            appendCreatedMarkup(hits);
-        } catch (error) {
-            notiflixForErrorReport(error);
+    try {
+        const { hits, totalHits } = await newDataAPIService.fetchArticles();
+        Notiflix.Loading.remove();
+        if(hits.length === 0){
+            Notiflix.Report.failure("Sorry, there are no images matching your search query. Please try again.");
+            return;
         }
+        Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+        enableSearchMoreBtn();
+        checkForMaxPage(totalHits);
+        appendCreatedMarkup(hits);
+    } catch (error) {
+        notiflixForErrorReport(error);
+    }
 };
 
 
