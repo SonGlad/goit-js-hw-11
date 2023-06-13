@@ -1,4 +1,4 @@
-import DataAPIService from './js/pixabayApiService'
+import DataAPIService from './js/pixabayApiService';
 import Notiflix from 'notiflix';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
@@ -94,8 +94,6 @@ function createMarkup(hits){
                             </p></div></div>`
     }).join('');
 };
-
-
 function appendCreatedMarkup(hits){
     const createdMarkup = createMarkup(hits);
     refs.divGalleryEl.insertAdjacentHTML('beforeend', createdMarkup );
@@ -108,7 +106,7 @@ function checkForMaxPage(totalHits){
     const amountPerPage = newDataAPIService.perPage;
     if(totalHits <= amountPerPage){
         disableSearchMoreBtn();
-        Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+        // Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
         return;
     }    
 };
@@ -122,7 +120,7 @@ function pageCheckForNotification({ hits , totalHits }){
     if(nextPage > maxPage){       
         appendCreatedMarkup(hits);
         disableSearchMoreBtn();
-        Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+        // Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
         Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
         return;
     } else {

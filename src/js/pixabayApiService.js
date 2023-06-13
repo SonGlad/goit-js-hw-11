@@ -14,14 +14,20 @@ export default class DataAPIService {
     };
     
     async fetchArticles() {   
-        const url = `${BASE_URL}/?key=${MY_API_KEY}&q=${this.searchQuery}&image_type=photo&
-        orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`;
-        
-        const response = await axios.get(url);
+        const url = BASE_URL;
+        const params = {
+            key: MY_API_KEY,
+            q: this.searchQuery,
+            image_type: "photo",
+            orientation: "horizontal",
+            safesearch: true,
+            page: this.Page,
+            per_page: this.perPage,
+        };
+
+        const response = await axios.get(url, {params});
             this.incrementPage();
             return response.data;
-            // const { hits, totalHits } = response.data;
-            // return { hits, totalHits };
     };
 
     setSearchValue(query) {
