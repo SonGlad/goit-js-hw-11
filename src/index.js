@@ -120,12 +120,12 @@ function pageCheckForNotification({ hits , totalHits }){
     if(nextPage > maxPage){       
         appendCreatedMarkup(hits);
         disableSearchMoreBtn();
-        // Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+        Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
         Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
         return;
     } else {
         appendCreatedMarkup(hits);
-        Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+        // Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
     }
 };
 
