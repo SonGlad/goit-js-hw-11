@@ -94,6 +94,8 @@ function createMarkup(hits){
                             </p></div></div>`
     }).join('');
 };
+
+
 function appendCreatedMarkup(hits){
     const createdMarkup = createMarkup(hits);
     refs.divGalleryEl.insertAdjacentHTML('beforeend', createdMarkup );

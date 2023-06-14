@@ -21,7 +21,7 @@ export default class DataAPIService {
             image_type: "photo",
             orientation: "horizontal",
             safesearch: true,
-            page: this.Page,
+            page: this.page,
             per_page: this.perPage,
         };
 
