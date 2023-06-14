@@ -1,4 +1,5 @@
 import DataAPIService from './js/pixabayApiService';
+import TemplateArticles from './templates/articles.hbs';
 import Notiflix from 'notiflix';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
@@ -72,33 +73,8 @@ async function onLoadMore(){
 };
 
 
-function createMarkup(hits){
-    return  hits.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => {
-        return `<div class="photo-card">
-                        <a class="picture" href="${largeImageURL}">
-                        <img src="${webformatURL}" alt="${tags}" width="300px" height ="200px" loading="lazy"/>
-                        </a>
-                        <div class="info">
-                            <p class="title"><strong>Tags:</strong> ${tags}</p>
-                            <p class="info-item">
-                                <b>Likes: ${likes}</b>
-                            </p>
-                            <p class="info-item">
-                                <b>Views: ${views}</b>
-                            </p>
-                            <p class="info-item">
-                                <b>Comments: ${comments}</b>
-                            </p>
-                            <p class="info-item">
-                                <b>Downloads: ${downloads}</b>
-                            </p></div></div>`
-    }).join('');
-};
-
-
 function appendCreatedMarkup(hits){
-    const createdMarkup = createMarkup(hits);
-    refs.divGalleryEl.insertAdjacentHTML('beforeend', createdMarkup );
+    refs.divGalleryEl.insertAdjacentHTML('beforeend', TemplateArticles(hits));
     pageScroll();
     lightbox.refresh();
 };
