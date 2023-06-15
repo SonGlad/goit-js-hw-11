@@ -51,7 +51,7 @@ async function generateFetchArticlesMarkup(){
         }
         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
         enableSearchMoreBtn();
-        checkForMaxPage(totalHits);
+        firstPageCheckForAmount(totalHits);
         appendCreatedMarkup(hits);
     } catch (error) {
         notiflixForErrorReport(error);
@@ -80,11 +80,14 @@ function appendCreatedMarkup(hits){
 };
 
 
-function checkForMaxPage(totalHits){
+function firstPageCheckForAmount(totalHits){
     const amountPerPage = newDataAPIService.perPage;
     if(totalHits <= amountPerPage){
         disableSearchMoreBtn();
-        // Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+        Notiflix.Notify.info(`We're sorry, but there are only ${totalHits} images as per your request
+        & this is the end of the search result`, {
+            timeout: 8000,
+        });
         return;
     }    
 };
@@ -93,8 +96,9 @@ function checkForMaxPage(totalHits){
 function pageCheckForNotification({ hits , totalHits }){
     const nextPage = newDataAPIService.page;
     const amountPerPage = newDataAPIService.perPage;
+    const currentPage = newDataAPIService.page - 1;
     const maxPage = Math.ceil(totalHits / amountPerPage);
-
+    
     if(nextPage > maxPage){       
         appendCreatedMarkup(hits);
         disableSearchMoreBtn();
@@ -102,8 +106,11 @@ function pageCheckForNotification({ hits , totalHits }){
         Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
         return;
     } else {
+        const watched = currentPage * amountPerPage;
+        const remaining = totalHits - watched;
         appendCreatedMarkup(hits);
-        // Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+        Notiflix.Notify.success(`Hooray! You successfully upload & ${watched} images already. 
+        ${remaining} images to go. Do not Stop!`);
     }
 };
 
@@ -132,6 +139,6 @@ function disableSearchMoreBtn(){
 
 function notiflixForErrorReport(error){
     Notiflix.Loading.remove();
-    Notiflix.Report.failure('Error fetching breeds:', error);
+    Notiflix.Report.failure("ERROR", error.message);
     throw new error;
 };
