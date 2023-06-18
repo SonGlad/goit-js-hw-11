@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "gsap": "^1.19.1",
     "hbs": "^4.2.0",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.6",

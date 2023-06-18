@@ -1,3 +1,5 @@
+// import {TweenMax, Power2, TimelineLite} from "gsap";
+
 let search = document.querySelector('.search');
 let searchInp = search.children[0];
 let searchLbl = search.children[1];

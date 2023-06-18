@@ -49,10 +49,13 @@ async function generateFetchArticlesMarkup(){
             Notiflix.Report.failure("Sorry, there are no images matching your search query. Please try again.");
             return;
         }
-        Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
-        enableSearchMoreBtn();
-        firstPageCheckForAmount(totalHits);
-        appendCreatedMarkup(hits);
+        searchMove();
+        setTimeout(() => {
+            Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+            enableSearchMoreBtn();
+            firstPageCheckForAmount(totalHits);
+            appendCreatedMarkup(hits);
+        }, 450);
     } catch (error) {
         notiflixForErrorReport(error);
     }
@@ -67,6 +70,7 @@ async function onLoadMore(){
             Notiflix.Loading.remove();
             enableSearchMoreBtn();
             pageCheckForNotification({ hits, totalHits });
+            pageScroll();
         } catch (error) {
             notiflixForErrorReport(error);
         }
@@ -75,7 +79,6 @@ async function onLoadMore(){
 
 function appendCreatedMarkup(hits){
     refs.divGalleryEl.insertAdjacentHTML('beforeend', TemplateArticles(hits));
-    pageScroll();
     lightbox.refresh();
 };
 
@@ -142,3 +145,7 @@ function notiflixForErrorReport(error){
     Notiflix.Report.failure("ERROR", error.message);
     throw new error;
 };
+
+function searchMove(){
+    refs.formEl.classList.remove('search-move');
+}
